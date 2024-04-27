@@ -1,6 +1,6 @@
 - name: new server baseline
-  hosts: 10.11.11.162
-  remote_user: mread 
+#  hosts: 10.11.11.162
+#  remote_user: mread 
    
   tasks:
   - name: Run the equivalent of "apt-get update" as a separate step
