@@ -20,8 +20,12 @@
     ansible.builtin.apt:
       pkg:
       - vim
-      - qemu-guest-agent
+      - qemu-guest-agent # start service
       - curl
       - wget
-      - bindutils
       - net-tools
+
+  - name: Make sure a qemu-guest-agent unit is running
+    ansible.builtin.systemd_service:
+      state: started
+      name: qemu-guest-agent
