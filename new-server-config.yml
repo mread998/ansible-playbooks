@@ -1,5 +1,5 @@
 - name: new server baseline
-  hosts: 10.11.11.157
+  hosts: 10.11.11.162
   remote_user: mread 
    
   tasks:
