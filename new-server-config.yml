@@ -1,0 +1,27 @@
+- name: new server baseline
+  hosts: xxx
+  remote_user: mread 
+   
+  tasks:
+  - name: Run the equivalent of "apt-get update" as a separate step
+    ansible.builtin.apt:
+      update_cache: yes
+
+  - name: Update all packages to their latest version
+    ansible.builtin.apt:
+      name: "*"
+      state: latest
+
+  - name: Upgrade the OS (apt-get dist-upgrade)
+    ansible.builtin.apt:
+      upgrade: dist
+
+  - name: Install a list of packages
+    ansible.builtin.apt:
+      pkg:
+      - vim
+      - qemu-guest-agent
+      - curl
+      - wget
+      - bindutils
+      - net-tools
