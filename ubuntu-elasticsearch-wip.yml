@@ -1,0 +1,36 @@
+- name: new server baseline
+  
+  tasks:
+  - name: Install a list of packages
+    ansible.builtin.apt_repository:
+      repo: "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable  main"
+      state: present
+
+  - name: Run the equivalent of "apt-get update" as a separate step
+    ansible.builtin.apt:
+      update_cache: yes
+
+  - name: Install a list of packages
+    ansible.builtin.apt:
+      pkg:
+      - vim
+      - qemu-guest-agent # start service
+      - curl
+      - wget
+      - net-
+      - elasticsearch
+      - apt-transport-https
+
+  - name: Update all packages to their latest version
+    ansible.builtin.apt:
+      name: "*"
+      state: latest
+
+  - name: Upgrade the OS (apt-get dist-upgrade)
+    ansible.builtin.apt:
+      upgrade: dist
+
+  - name: Make sure a qemu-guest-agent unit is running
+    ansible.builtin.systemd_service:
+      state: started
+      name: qemu-guest-agent
